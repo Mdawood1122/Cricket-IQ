@@ -2,12 +2,14 @@ env/
 .env
 __pycache__/
 
-# Training data (~80MB) and trained models - regenerable via
-# `python -m models.win_predictor` etc. (needs data/ downloaded first from
-# cricsheet.org, see the README / chat history for the download commands).
-# Too large/binary to be worth versioning in git.
+# Training data (~80MB) - regenerable via the Cricsheet download commands
+# (see chat history), but too large/binary to be worth versioning in git.
 data/
-models/saved/*.pkl
+
+# NOTE: models/saved/*.pkl is deliberately NOT ignored, even though it's
+# a build artifact - Render deploys straight from this repo and won't have
+# data/ available to retrain from, so the trained models need to be
+# committed for the deployed API to actually serve predictions.
 
 # SQLite database - local runtime state, not source.
 cricket_iq.db

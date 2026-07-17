@@ -11,6 +11,7 @@ Five pages, picked from the sidebar: Live Scores, Win Probability,
 Score Prediction, Player Predictions, Match History.
 """
 
+import os
 import time
 from datetime import datetime
 
@@ -22,7 +23,14 @@ import plotly.express as px
 
 from database import SessionLocal, Prediction
 
-API_BASE = "http://localhost:8000"
+# Resolution order for where the API lives:
+#   1. Streamlit Cloud secret (Settings -> Secrets -> API_BASE_URL = "...")
+#   2. CRICKET_IQ_API_URL environment variable (handy for Render/Docker)
+#   3. localhost, for running everything on one machine
+try:
+    API_BASE = st.secrets["API_BASE_URL"]
+except (KeyError, FileNotFoundError):
+    API_BASE = os.getenv("CRICKET_IQ_API_URL", "http://localhost:8000")
 
 st.set_page_config(page_title="Cricket IQ", page_icon="🏏", layout="wide")
 
