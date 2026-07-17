@@ -1,0 +1,16 @@
+env/
+.env
+__pycache__/
+
+# Training data (~80MB) and trained models - regenerable via
+# `python -m models.win_predictor` etc. (needs data/ downloaded first from
+# cricsheet.org, see the README / chat history for the download commands).
+# Too large/binary to be worth versioning in git.
+data/
+models/saved/*.pkl
+
+# SQLite database - local runtime state, not source.
+cricket_iq.db
+
+# stray leftover files from an earlier data-extraction attempt
+data/tests/*.csv
